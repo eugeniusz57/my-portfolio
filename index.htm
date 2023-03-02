@@ -202,7 +202,7 @@
             </a>
           </div>
           <div class="contact-right">
-            <form>
+            <form name = submit-to-google-sheet>
               <input type="text" name="name" placeholder="Your name" required />
               <input
                 type="email"
@@ -220,6 +220,9 @@
           </div>
         </div>
       </div>
+      <div class="copyright">
+        <p>Copyright Eugeniusz 2023 <i class="fa-sharp fa-solid fa-heart"></i></p>
+      </div>
     </div>
 
     <script>
@@ -235,6 +238,17 @@
         event.currentTarget.classList.add("active-link");
         document.getElementById(tabName).classList.add("active-tab");
       }
+    </script>
+    <script>
+      const scriptURL = 'https://script.google.com/macros/s/AKfycbxigq_Egl8covfsBc6FHltoj3GpaYHUPs_azgAwFMyPNndjYS4qQZZj4hfm4XBUhSwd/exec'
+      const form = document.forms['submit-to-google-sheet']
+    
+      form.addEventListener('submit', e => {
+        e.preventDefault()
+        fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+          .then(response => console.log('Success!', response))
+          .catch(error => console.error('Error!', error.message))
+      })
     </script>
   </body>
 </html>
